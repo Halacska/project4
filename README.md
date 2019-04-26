@@ -25,3 +25,6 @@ Az egyes verziók tartalma:
   
 3.1  
 A projekthez hozzá lett adva a CSS.
+
+3.2
+JUnit 4.12 hozzáadása. Test Package inicializálás.
