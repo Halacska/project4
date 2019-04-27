@@ -42,14 +42,7 @@ public class FXMLProjektController implements Initializable {
     HashSet<Seat> actual_seats;
     
     
-    //ha k?sz a DB, itt majd ki lehet olvasni az adatokat a Modelbe
-    public void startController(){
-        logout_btn.setVisible(false); //logout button elrejt?se, am?g nincs bejelentkezett felhaszn?l?
-        logout_img.setVisible(false);
-        booking_tab.setDisable(true); //booking tab nem el?rhet? filmv?laszt?sig 
-        actual_seats = new HashSet<Seat>(); //az?rt sz?ks?ges, hogy egyszerre t?bb helyet lehessen foglalni
-    }
-    
+        
     public void setModel(Model model) {
         this.model = model;
         //csak a p?lda kedv??rt 3 random film, majd a DB-s r?szn?l erre ?gyis kital?lunk valami jobbat (gondolom)
@@ -59,7 +52,12 @@ public class FXMLProjektController implements Initializable {
     }
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {        
+    public void initialize(URL url, ResourceBundle rb) {
+        setModel(new Model());
+        logout_btn.setVisible(false); //logout button elrejt?se, am?g nincs bejelentkezett felhaszn?l?
+        logout_img.setVisible(false);
+        booking_tab.setDisable(true); //booking tab nem el?rhet? filmv?laszt?sig 
+        actual_seats = new HashSet<Seat>(); //az?rt sz?ks?ges, hogy egyszerre t?bb helyet lehessen foglalni
     }    
     
     //regisztr?ci?  
@@ -157,7 +155,7 @@ public class FXMLProjektController implements Initializable {
    @FXML
    public void button0() {
        actual_show = (Show) model.getShows().get(0); //film lek?r?se a modelben l?v? list?b?l             
-       image.setImage(new Image(getClass().getResourceAsStream("endgame.jpg"))); //jobb oldali imageview-ba az akut?lis film k?p?nek bet?lt?se
+       image.setImage(new Image(getClass().getResourceAsStream("/images/endgame.jpg"))); //jobb oldali imageview-ba az akut?lis film k?p?nek bet?lt?se
        image.setVisible(false); //egyel?re l?thatatlan, ha ?tdob a booking-ra, l?that?v? v?lik (akkor sz?m?t, ha a felhaszn?l? bejelentkez?s n?lk?l akar filmet v?lasztani)
        loadMovie(); //a n?z?t?r (?s a helyek ?llapot?nak) bet?lt?se
    }
@@ -165,7 +163,7 @@ public class FXMLProjektController implements Initializable {
    @FXML
    public void button1() {
        actual_show = (Show) model.getShows().get(1);       
-       image.setImage(new Image(getClass().getResourceAsStream("marvel.jpg")));
+       image.setImage(new Image(getClass().getResourceAsStream("/images/marvel.jpg")));
        image.setVisible(false);
        loadMovie();
    }
@@ -173,7 +171,7 @@ public class FXMLProjektController implements Initializable {
    @FXML
    public void button2() {
        actual_show = (Show) model.getShows().get(2);
-       image.setImage(new Image(getClass().getResourceAsStream("pet.jpg")));
+       image.setImage(new Image(getClass().getResourceAsStream("/images/pet.jpg")));
        image.setVisible(false);
        loadMovie();
    }
