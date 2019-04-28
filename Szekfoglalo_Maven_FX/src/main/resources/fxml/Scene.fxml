@@ -23,8 +23,8 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="AnchorPane">
                      <children>
                         <TextField fx:id="username" layoutX="212.0" layoutY="158.0" prefHeight="48.0" prefWidth="194.0" promptText="Username" />
-                        <Button layoutX="337.0" layoutY="287.0" mnemonicParsing="false" onAction="#Login" prefHeight="35.0" prefWidth="83.0" styleClass="loginbutton" text="Sign In" textFill="WHITE" />
-                        <Button layoutX="179.0" layoutY="287.0" mnemonicParsing="false" onAction="#Registration" prefHeight="35.0" prefWidth="83.0" text="Registration" />
+                        <Button fx:id ="login" layoutX="337.0" layoutY="287.0" mnemonicParsing="false" onAction="#Login" prefHeight="35.0" prefWidth="83.0" styleClass="loginbutton" text="Sign In" textFill="WHITE" />
+                        <Button fx:id ="register" layoutX="179.0" layoutY="287.0" mnemonicParsing="false" onAction="#Registration" prefHeight="35.0" prefWidth="83.0" text="Registration" />
                         <ImageView fitHeight="35.0" fitWidth="45.0" layoutX="271.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../images/icons8-registration-50.png" />

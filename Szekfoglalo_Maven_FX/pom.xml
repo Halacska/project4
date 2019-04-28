@@ -114,15 +114,15 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>org.testfx</groupId>
-            <artifactId>testfx-core</artifactId>
-            <version>4.0.15-alpha</version>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.loadui</groupId>
+            <artifactId>testFx</artifactId>
+            <version>3.1.2</version>
         </dependency>
     </dependencies>
 </project>
