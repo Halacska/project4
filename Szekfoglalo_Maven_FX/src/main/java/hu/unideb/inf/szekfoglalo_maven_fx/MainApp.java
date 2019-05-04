@@ -1,11 +1,14 @@
 package hu.unideb.inf.szekfoglalo_maven_fx;
 
+import hu.unideb.inf.szekfoglalo_maven_fx.hibernate.db.HibernateUtil;
+import hu.unideb.inf.szekfoglalo_maven_fx.model.User;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.hibernate.Session; //kés?bb kiszedhet?
 
 
 public class MainApp extends Application {
@@ -32,6 +35,16 @@ public class MainApp extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        //A DB-bol kiszedne a kulcs (User_name) alapján egy User-t
+        //És azt írná ki sysout-al
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        User user = (User)session.get(User.class, "a");
+        session.getTransaction().commit();
+        session.close();
+        System.out.println(user);
+        //----------------------------------------------
+        HibernateUtil.closeSessionFactory();
     }
 
 }

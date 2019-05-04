@@ -1,15 +1,26 @@
 package hu.unideb.inf.szekfoglalo_maven_fx.model;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /*
     A felhasználót reprezentáló osztály.
     A foglalt helyek listáját az el?adások nevei szerint tárolja.
 */
-
+@Entity
+@Table(name = "Cinema_User")
 public class User {
+    @Id
+    @Column(name = "user_name", unique = true, nullable = false)
     public final String name;
+    
+    @Column(name = "user_password", unique = false, nullable = false)
     private final String password;
+    
+    @Column(name = "user_seats", unique = false, nullable = false)
     private HashMap<String, ArrayList<Seat>> booking;
     
     //visszaadja, hogy az adott felhasználónak van-e foglalása az adott helyre    

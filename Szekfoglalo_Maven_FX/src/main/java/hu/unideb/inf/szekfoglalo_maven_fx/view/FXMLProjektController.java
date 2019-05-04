@@ -1,5 +1,6 @@
 package hu.unideb.inf.szekfoglalo_maven_fx.view;
 
+import hu.unideb.inf.szekfoglalo_maven_fx.hibernate.db.HibernateHandler;
 import java.io.InputStream;
 import javafx.event.ActionEvent;
 import java.net.URL;
@@ -91,6 +92,7 @@ public class FXMLProjektController implements Initializable {
         message_label.setText("Succesful registration.");        
         username.clear();
         password.clear();
+        HibernateHandler.UplodeUser(tmp);
     }
     
     //bejelentkez?s
