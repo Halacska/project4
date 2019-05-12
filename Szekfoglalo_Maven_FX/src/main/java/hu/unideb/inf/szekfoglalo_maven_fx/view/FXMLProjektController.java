@@ -1,6 +1,7 @@
 package hu.unideb.inf.szekfoglalo_maven_fx.view;
 
 import hu.unideb.inf.szekfoglalo_maven_fx.hibernate.db.HibernateHandler;
+import hu.unideb.inf.szekfoglalo_maven_fx.hibernate.db.HibernateUtil; ///////
 import java.io.InputStream;
 import javafx.event.ActionEvent;
 import java.net.URL;
@@ -22,6 +23,9 @@ import hu.unideb.inf.szekfoglalo_maven_fx.model.Model;
 import hu.unideb.inf.szekfoglalo_maven_fx.model.Seat;
 import hu.unideb.inf.szekfoglalo_maven_fx.model.Show;
 import hu.unideb.inf.szekfoglalo_maven_fx.model.User;
+import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.Session; /////////
 
 public class FXMLProjektController implements Initializable {
     
@@ -51,7 +55,26 @@ public class FXMLProjektController implements Initializable {
         //csak a p?lda kedv??rt 3 random film, majd a DB-s r?szn?l erre ?gyis kital?lunk valami jobbat (gondolom)
         model.getShows().add(new Show("Endgame", 10, 10));
         model.getShows().add(new Show("Captain Marvel", 10, 8));
-        model.getShows().add(new Show("Pet Sematary", 8, 8));        
+        model.getShows().add(new Show("Pet Sematary", 8, 8));
+        model.getUsers().addAll(HibernateHandler.DownloadUsers());
+        ArrayList<Show> sl = model.getShows();
+        //lefoglaltá teszi a korábban lefoglalt helyeket
+        for (Show show : sl) {
+            ArrayList<User> ul = model.getUsers();
+            for (User user : ul) {
+                try {
+                    ArrayList<Seat> sel = user.getBooking().get(show.name);
+                    for (Seat seat : sel) {
+                        try {
+                            show.room[seat.row][seat.column] = true;
+                        } catch (Exception ex) {
+                        }   
+                    }                    
+                } catch (Exception e) {
+                }                
+            }
+        }
+        //--------------------------------------------------
     }
     
     @Override
@@ -92,7 +115,7 @@ public class FXMLProjektController implements Initializable {
         message_label.setText("Succesful registration.");        
         username.clear();
         password.clear();
-        HibernateHandler.UplodeUser(tmp);
+        HibernateHandler.UploadUser(tmp);
     }
     
     //bejelentkez?s
@@ -295,8 +318,9 @@ public class FXMLProjektController implements Initializable {
                 alert(str);
                 continue;            
             }
-           actual_show.room[s.row][s.column] = true; //ha igen, most m?r nem
-           actual_user.addBooking(actual_show, s); //hozz?aadja a felhaszn?l? list?j?hoz            
+            actual_show.room[s.row][s.column] = true; //ha igen, most m?r nem
+            actual_user.addBooking(actual_show, s); //hozz?aadja a felhaszn?l? list?j?hoz
+            HibernateHandler.UploadBooking(actual_user, actual_show, s);           
         }              
         
         str = String.format("%d seat(s) %s succesfully booked.\n", success, (success > 1) ? "are" : "is");
@@ -325,7 +349,14 @@ public class FXMLProjektController implements Initializable {
                 continue;
             }
             actual_user.deleteBooking(actual_show, s); //t?rli a foglal?st a felhaszn?l? list?j?r?l
-            actual_show.room[s.row][s.column] = false; //a hely ?jra szabad            
+            actual_show.room[s.row][s.column] = false; //a hely ?jra szabad
+//            Session session = HibernateUtil.getSessionFactory().openSession();
+//            session.beginTransaction();
+//            User user = (User)session.get(User.class, actual_user.getName());
+//            user.deleteBooking(actual_show, s);
+//            session.getTransaction().commit();
+//            session.close();
+            HibernateHandler.DeleteBooking(actual_user, actual_show, s);
         } 
         
         str = String.format("%d seat(s) %s succesfully deleted.\n", success, (success > 1) ? "are" : "is");
