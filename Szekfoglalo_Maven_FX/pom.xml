@@ -134,6 +134,18 @@
             <artifactId>ojdbc6</artifactId>
             <version>11.2.0.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.8.2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbyclient</artifactId>
+            <version>10.8.2.2</version>
+        </dependency>
+
     </dependencies>
     <!--->Az ojdbc6.jar-t mashogy nem tudtam hozzáadni csak így<-->
     <repositories>

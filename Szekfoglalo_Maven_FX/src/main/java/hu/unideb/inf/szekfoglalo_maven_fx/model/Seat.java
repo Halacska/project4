@@ -1,5 +1,7 @@
 package hu.unideb.inf.szekfoglalo_maven_fx.model;
 
+import java.io.Serializable;
+
 /*
     Egy adott helyet reprezentáló osztály.
     Mivel a controller úgyis csak egy adott el?adással dolgozik egyszerre,
@@ -7,7 +9,7 @@ package hu.unideb.inf.szekfoglalo_maven_fx.model;
 */
 
 
-public class Seat {
+public class Seat implements Serializable{
         public int row;
         public int column;
 

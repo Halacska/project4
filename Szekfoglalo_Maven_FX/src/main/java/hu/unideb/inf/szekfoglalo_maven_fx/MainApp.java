@@ -35,15 +35,6 @@ public class MainApp extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-        //A DB-bol kiszedne a kulcs (User_name) alapján egy User-t
-        //És azt írná ki sysout-al
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        User user = (User)session.get(User.class, "a");
-        session.getTransaction().commit();
-        session.close();
-        System.out.println(user);
-        //----------------------------------------------
         HibernateUtil.closeSessionFactory();
     }
 
